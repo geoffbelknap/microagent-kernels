@@ -30,6 +30,12 @@ The config check verifies the built kernel has Firecracker boot-critical
 options such as virtio-mmio, virtio block, vsock, ext4, and serial console
 support built in.
 
+The full KVM boot smoke lives in `microagent-kit`:
+
+```sh
+make smoke-firecracker
+```
+
 ## Requirements
 
 `make deps` installs the host packages needed to build Linux kernels on Ubuntu
