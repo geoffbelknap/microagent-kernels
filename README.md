@@ -11,7 +11,8 @@ repo owns kernel configs, build scripts, checksums, and release notes.
 Build an amd64 Firecracker kernel on a Linux host:
 
 ```sh
-scripts/build-firecracker-kernel.sh --arch amd64
+make deps
+make kernel-amd64
 ```
 
 The build writes:
@@ -26,12 +27,8 @@ its SHA-256 file.
 
 ## Requirements
 
-Install the host packages needed to build Linux kernels. On Ubuntu:
-
-```sh
-sudo apt-get update
-sudo apt-get install -y build-essential bc bison flex libssl-dev libelf-dev xz-utils curl
-```
+`make deps` installs the host packages needed to build Linux kernels on Ubuntu
+and Debian.
 
 Cross-builds need the matching cross compiler and should pass
 `--cross-prefix`.
