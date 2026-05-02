@@ -129,28 +129,29 @@ fi
 make -C "$source_dir" "${make_args[@]}" "$defconfig"
 
 config="$source_dir/scripts/config"
-"$config" --enable BLK_DEV_INITRD
-"$config" --enable DEVTMPFS
-"$config" --enable DEVTMPFS_MOUNT
-"$config" --enable EXT4_FS
-"$config" --enable NET
-"$config" --enable INET
-"$config" --enable UNIX
-"$config" --enable VIRTIO
-"$config" --enable VIRTIO_BLK
-"$config" --enable VIRTIO_NET
-"$config" --enable VIRTIO_MMIO
-"$config" --enable VIRTIO_MMIO_CMDLINE_DEVICES
-"$config" --enable VSOCKETS
-"$config" --enable VIRTIO_VSOCKETS
-"$config" --enable SERIAL_8250
-"$config" --enable SERIAL_8250_CONSOLE
-"$config" --disable DEBUG_INFO
+kernel_config="$source_dir/.config"
+"$config" --file "$kernel_config" --enable BLK_DEV_INITRD
+"$config" --file "$kernel_config" --enable DEVTMPFS
+"$config" --file "$kernel_config" --enable DEVTMPFS_MOUNT
+"$config" --file "$kernel_config" --enable EXT4_FS
+"$config" --file "$kernel_config" --enable NET
+"$config" --file "$kernel_config" --enable INET
+"$config" --file "$kernel_config" --enable UNIX
+"$config" --file "$kernel_config" --enable VIRTIO
+"$config" --file "$kernel_config" --enable VIRTIO_BLK
+"$config" --file "$kernel_config" --enable VIRTIO_NET
+"$config" --file "$kernel_config" --enable VIRTIO_MMIO
+"$config" --file "$kernel_config" --enable VIRTIO_MMIO_CMDLINE_DEVICES
+"$config" --file "$kernel_config" --enable VSOCKETS
+"$config" --file "$kernel_config" --enable VIRTIO_VSOCKETS
+"$config" --file "$kernel_config" --enable SERIAL_8250
+"$config" --file "$kernel_config" --enable SERIAL_8250_CONSOLE
+"$config" --file "$kernel_config" --disable DEBUG_INFO
 
 if [ "$arch" = "amd64" ]; then
-  "$config" --enable PCI
-  "$config" --enable VIRTIO_PCI
-  "$config" --enable VIRTIO_PCI_LEGACY
+  "$config" --file "$kernel_config" --enable PCI
+  "$config" --file "$kernel_config" --enable VIRTIO_PCI
+  "$config" --file "$kernel_config" --enable VIRTIO_PCI_LEGACY
 fi
 
 make -C "$source_dir" "${make_args[@]}" olddefconfig
