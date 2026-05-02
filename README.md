@@ -13,6 +13,7 @@ Build an amd64 Firecracker kernel on a Linux host:
 ```sh
 make deps
 make kernel-amd64
+make check-kernel-config-amd64
 ```
 
 The build writes:
@@ -24,6 +25,10 @@ dist/kernels/microagent-kernel-6.1.155-firecracker-amd64.sha256
 
 Build artifacts are not committed. Releases should attach the kernel image and
 its SHA-256 file.
+
+The config check verifies the built kernel has Firecracker boot-critical
+options such as virtio-mmio, virtio block, vsock, ext4, and serial console
+support built in.
 
 ## Requirements
 
