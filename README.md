@@ -16,11 +16,21 @@ make kernel-amd64
 make check-kernel-config-amd64
 ```
 
+Build an arm64 Apple VF kernel on a Linux host:
+
+```sh
+make deps
+make kernel-applevf-arm64
+make check-applevf-config-arm64
+```
+
 The build writes:
 
 ```text
 dist/kernels/microagent-kernel-6.1.155-firecracker-amd64
 dist/kernels/microagent-kernel-6.1.155-firecracker-amd64.sha256
+dist/kernels/microagent-kernel-6.12.22-apple-vf-arm64
+dist/kernels/microagent-kernel-6.12.22-apple-vf-arm64.sha256
 ```
 
 Build artifacts are not committed. Releases should attach the kernel image and
@@ -36,6 +46,12 @@ The full KVM boot smoke lives in `microagent-kit`:
 make smoke-firecracker
 ```
 
+The Apple VF vsock diagnostic smoke also lives in `microagent-kit`:
+
+```sh
+make smoke-applevf-vsock
+```
+
 `kernels-6.1.155-r2` is the first boot-proven Firecracker amd64 kernel release
 for `microagent-kit v0.1.22`. Its SHA-256 is:
 
@@ -49,4 +65,5 @@ for `microagent-kit v0.1.22`. Its SHA-256 is:
 and Debian.
 
 Cross-builds need the matching cross compiler and should pass
-`--cross-prefix`.
+`--cross-prefix`. On Debian and Ubuntu, `make deps` installs the arm64 cross
+compiler used by the Apple VF build.

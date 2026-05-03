@@ -10,6 +10,7 @@ packages=(
   libelf-dev
   xz-utils
   curl
+  gcc-aarch64-linux-gnu
 )
 
 if [ ! -r /etc/os-release ]; then
