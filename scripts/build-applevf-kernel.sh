@@ -117,10 +117,13 @@ kernel_config="$source_dir/.config"
 "$config" --file "$kernel_config" --enable NET
 "$config" --file "$kernel_config" --enable INET
 "$config" --file "$kernel_config" --enable UNIX
+"$config" --file "$kernel_config" --enable PCI
+"$config" --file "$kernel_config" --enable PCI_HOST_GENERIC
 "$config" --file "$kernel_config" --enable VIRTIO
 "$config" --file "$kernel_config" --enable VIRTIO_BLK
 "$config" --file "$kernel_config" --enable VIRTIO_CONSOLE
 "$config" --file "$kernel_config" --enable HW_RANDOM_VIRTIO
+"$config" --file "$kernel_config" --enable VIRTIO_PCI
 "$config" --file "$kernel_config" --enable VIRTIO_MMIO
 "$config" --file "$kernel_config" --enable VIRTIO_MMIO_CMDLINE_DEVICES
 "$config" --file "$kernel_config" --enable VSOCKETS
@@ -129,7 +132,7 @@ kernel_config="$source_dir/.config"
 "$config" --file "$kernel_config" --disable DEBUG_INFO
 
 make -C "$source_dir" "${make_args[@]}" olddefconfig
-make -C "$source_dir" "${make_args[@]}" "-j$jobs" arch/arm64/boot/Image
+make -C "$source_dir" "${make_args[@]}" "-j$jobs" Image
 
 artifact="$out_dir/microagent-kernel-$version-apple-vf-arm64"
 cp "$source_dir/arch/arm64/boot/Image" "$artifact"
