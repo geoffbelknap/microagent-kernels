@@ -2,8 +2,8 @@
 
 Curated Linux kernels for Microagent.
 
-This repo builds and releases the kernel images that `microagent-kit` installs
-by default. The toolchain for using Microagent stays in `microagent-kit`; this
+This repo builds and releases the kernel images that `microagent` installs
+by default. The toolchain for using Microagent stays in `microagent`; this
 repo owns kernel configs, build scripts, checksums, and release notes.
 
 ## Build
@@ -40,20 +40,20 @@ The config check verifies the built kernel has Firecracker boot-critical
 options such as virtio-mmio, virtio block, vsock, ext4, and serial console
 support built in.
 
-The full KVM boot smoke lives in `microagent-kit`:
+The full KVM boot smoke lives in `microagent`:
 
 ```sh
 make smoke-firecracker
 ```
 
-The Apple VF vsock diagnostic smoke also lives in `microagent-kit`:
+The Apple VF vsock diagnostic smoke also lives in `microagent`:
 
 ```sh
 make smoke-applevf-vsock
 ```
 
 `kernels-6.1.155-r2` is the first boot-proven Firecracker amd64 kernel release
-for `microagent-kit v0.1.22`. Its SHA-256 is:
+for `microagent v0.1.22`. Its SHA-256 is:
 
 ```text
 4bbe8b2fd19f78fea4bf02d52a67482227a896c90a63f272b6a084fa46a416c0
