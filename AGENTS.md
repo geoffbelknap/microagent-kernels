@@ -7,7 +7,7 @@ This repo builds curated Linux kernels for Microagent.
 - Keep build scripts, kernel configs, checksums, and release notes here.
 - Do not add Microagent CLI/runtime code here.
 - Do not commit built kernels, Linux source trees, or build directories.
-- Release artifacts should be pinned by SHA-256 and consumed by `microagent-kit`.
+- Release artifacts should be pinned by SHA-256 and consumed by `microagent`.
 
 ## Build Rules
 
