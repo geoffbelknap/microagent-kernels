@@ -24,6 +24,15 @@ make kernel-applevf-arm64
 make check-applevf-config-arm64
 ```
 
+Build an amd64 Windows Hyper-V kernel on a Linux host. WSL is acceptable for
+building this kernel; the Microagent Windows Hyper-V runtime does not use WSL.
+
+```sh
+make deps
+make kernel-hyperv-amd64
+make check-hyperv-config-amd64
+```
+
 The build writes:
 
 ```text
@@ -31,14 +40,15 @@ dist/kernels/microagent-kernel-6.1.155-firecracker-amd64
 dist/kernels/microagent-kernel-6.1.155-firecracker-amd64.sha256
 dist/kernels/microagent-kernel-6.12.22-apple-vf-arm64
 dist/kernels/microagent-kernel-6.12.22-apple-vf-arm64.sha256
+dist/kernels/microagent-kernel-6.12.22-windows-hyperv-amd64
+dist/kernels/microagent-kernel-6.12.22-windows-hyperv-amd64.sha256
 ```
 
 Build artifacts are not committed. Releases should attach the kernel image and
 its SHA-256 file.
 
-The config check verifies the built kernel has Firecracker boot-critical
-options such as virtio-mmio, virtio block, vsock, ext4, and serial console
-support built in.
+The config checks verify each built kernel has backend boot-critical options
+such as block storage, vsock, ext4, and console support built in.
 
 The full KVM boot smoke lives in `microagent`:
 
@@ -50,6 +60,20 @@ The Apple VF vsock diagnostic smoke also lives in `microagent`:
 
 ```sh
 make smoke-applevf-vsock
+```
+
+For local Windows Hyper-V testing, copy the built kernel to the Microagent
+local kernel override path:
+
+```powershell
+C:\Users\geoff\.microagent\kernels\windows-hyperv\amd64\Image
+```
+
+From WSL, that copy step is:
+
+```sh
+mkdir -p /mnt/c/Users/geoff/.microagent/kernels/windows-hyperv/amd64
+cp dist/kernels/microagent-kernel-*-windows-hyperv-amd64 /mnt/c/Users/geoff/.microagent/kernels/windows-hyperv/amd64/Image
 ```
 
 `kernels-6.1.155-r2` is the first boot-proven Firecracker amd64 kernel release
