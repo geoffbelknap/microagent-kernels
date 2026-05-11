@@ -83,11 +83,13 @@ case "$arch" in
   amd64)
     kernel_arch="x86"
     defconfig="x86_64_defconfig"
+    kernel_target="vmlinux"
     kernel_image="vmlinux"
     ;;
   arm64)
     kernel_arch="arm64"
     defconfig="defconfig"
+    kernel_target="Image"
     kernel_image="arch/arm64/boot/Image"
     ;;
   *)
@@ -155,7 +157,7 @@ if [ "$arch" = "amd64" ]; then
 fi
 
 make -C "$source_dir" "${make_args[@]}" olddefconfig
-make -C "$source_dir" "${make_args[@]}" "-j$jobs" "$kernel_image"
+make -C "$source_dir" "${make_args[@]}" "-j$jobs" "$kernel_target"
 
 artifact="$out_dir/microagent-kernel-$version-firecracker-$arch"
 cp "$source_dir/$kernel_image" "$artifact"
